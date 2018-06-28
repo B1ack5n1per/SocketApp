@@ -10,6 +10,14 @@ var io = undefined;
 
 app.use(express.static('public'));
 
+app.get('/port', (req, res) => {
+  if (port === 3000) {
+    res.send({ type: 'local' });
+  } else {
+    res.send({ type: 'heroku' });
+  };
+});
+
 MongoClient.connect(db.url, (err, database) => {
   if (err) {
     throw err;
