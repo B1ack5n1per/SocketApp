@@ -18,6 +18,10 @@ app.get('/port', (req, res) => {
   };
 });
 
+app.get('/', (req, res) => {
+  res.redirect('/chat');
+});
+
 MongoClient.connect(db.url, (err, database) => {
   if (err) {
     throw err;
