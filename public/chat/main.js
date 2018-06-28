@@ -25,6 +25,7 @@ $(document).ready(() => {
       $('#roomnumber').on('keydown', () => {
         $('.window').html('');
         chatroom = document.getElementById('roomnumber').value;
+        console.log(chatroom);
       });
       $('#message').on('keydown', () => {
         message = document.getElementById('message').value;
