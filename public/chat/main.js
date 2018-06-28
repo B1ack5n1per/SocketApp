@@ -42,6 +42,7 @@ $(document).ready(() => {
         $('#message').val('');
       });
       socket.on('chat', (data) => {
+        chatroom = document.getElementById('roomnumber').value;
         if (chatroom === data.room) {
           $('.window').append('<div class="message">' + data.message + '</div>');
         };
