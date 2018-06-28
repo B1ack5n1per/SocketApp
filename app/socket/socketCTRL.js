@@ -4,7 +4,16 @@ module.exports = (app, db, io) => {
 
     socket.on('chat', (data) => {
       console.log(data);
-      io.sockets.emit('chat', data);
+      let query = {
+        number: Number(data.room),
+      };
+      console.log(query);
+      db.collection('rooms').findOne(query, (err, result) => {
+        console.log(result);
+        if (result != null) {
+          io.sockets.emit('chat', data);
+        };
+      });
     });
 
   });
