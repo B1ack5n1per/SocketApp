@@ -22,7 +22,7 @@ $(document).ready(() => {
         socket = io.connect('https://taylorschatapp.herokuapp.com');
       };
 
-      $('#roomnumber').on('keydown', () => {
+      $('#roomnumber').on('keyup', () => {
         $('.window').html('');
         chatroom = document.getElementById('roomnumber').value;
         console.log(chatroom);
