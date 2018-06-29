@@ -1,6 +1,8 @@
 :root {
   --dark: rgb(125, 125, 125);
   --color: rgb(47, 47, 47);
+  --success: rgb(97, 255, 50);
+  --error: rgb(252, 49, 49);
 }
 
 html {
