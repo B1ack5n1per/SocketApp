@@ -22,6 +22,7 @@ function send() {
       user: name,
     });
   } else if (name.length < 1) {
+    $('#name').css('color', 'rgb(252, 49, 49)');
     alert('Please provide a username in the Username box below');
   };
 };
@@ -61,14 +62,18 @@ $(document).ready(() => {
               if (res[0] != 'fail') {
                 for (let i = 0; i < res.length; i++) {
                   $('.window').append('<div class="message">' + res[i] + '</div>');
+                  $('#roomnumber').css('color', 'rgb(97, 255, 50)');
                 };
               }
             },
           });
+        } else {
+          $('#roomnumber').css('color', 'rgb(252, 49, 49)');
         };
       });
       $('#roomnumber').on('keydown', () => {
         $('.window').html('');
+        $('#roomnumber').css('color', 'rgb(252, 49, 49)');
       });
       $('#message').on('keydown', () => {
         message = document.getElementById('message').value;
@@ -81,6 +86,7 @@ $(document).ready(() => {
       });
       $('#name').on('keypress', (event) => {
         if (event.charCode === 13) {
+          $('#name').css('color', 'rgb(97, 255, 50)');
           document.cookie = 'username=' + event.target.value;
           console.log(document.cookie);
         };

@@ -53,3 +53,7 @@ button {
   display: block;
   border: none;
 }
+
+#name {
+    color: rgb(97, 255, 50);
+}
