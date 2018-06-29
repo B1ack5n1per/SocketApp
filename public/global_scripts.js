@@ -1,5 +1,5 @@
 $(document).ready(() => {
-  $('body').prepend('<nav><a href="/chat"><div id="icon">Chat</div></a> <a href="#" id="makeRoom">Make Chatroom</a> <a href="/profile">Profile</a></nav>');
+  $('body').prepend('<nav><a href="/chat"><div id="icon">Chat</div></a> <a href="#" id="makeRoom">Make Chatroom</a></nav>');
   $('#makeRoom').on('click', () => {
     $.ajax({
       type: 'GET',

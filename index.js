@@ -9,6 +9,7 @@ var app = express();
 var io = undefined;
 
 app.use(express.static('public'));
+app.use(bodyParser.urlencoded({ extended: true }));
 
 app.get('/port', (req, res) => {
   if (port === 3000) {

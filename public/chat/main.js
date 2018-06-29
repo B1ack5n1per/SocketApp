@@ -1,11 +1,14 @@
 var message;
 var chatroom;
 var socket;
+var name;
+
 function send() {
   if (message.length > 0) {
     socket.emit('chat', {
       message: message,
       room: chatroom,
+      user: name,
     });
   };
 };
@@ -22,10 +25,32 @@ $(document).ready(() => {
         socket = io.connect('https://taylorschatapp.herokuapp.com');
       };
 
-      $('#roomnumber').on('keyup', () => {
-        $('.window').html('');
+      $('#roomnumber').on('keypress', (event) => {
+        console.log(event);
         chatroom = document.getElementById('roomnumber').value;
         console.log(chatroom);
+        if (event.charCode === 13) {
+          $.ajax({
+            method: 'POST',
+            url: '/getMessages',
+            headers: {
+              contentType: 'application/json',
+            },
+            data: {
+              room: chatroom,
+            },
+            success: (res) => {
+              if (res[0] != 'fail') {
+                for (let i = 0; i < res.length; i++) {
+                  $('.window').append('<div class="message">' + res[i] + '</div>');
+                };
+              }
+            },
+          });
+        };
+      });
+      $('#roomnumber').on('keydown', () => {
+        $('.window').html('');
       });
       $('#message').on('keydown', () => {
         message = document.getElementById('message').value;
@@ -38,13 +63,23 @@ $(document).ready(() => {
       });
       $('.send').on('click', () => {
         message = document.getElementById('message').value;
+        name = document.getElementById('name').value;
         send();
         $('#message').val('');
+      });
+      $('#message').on('keypress', (event) => {
+        console.log(event);
+        if (event.charCode === 13) {
+          message = document.getElementById('message').value;
+          name = document.getElementById('name').value;
+          send();
+          $('#message').val('');
+        };
       });
       socket.on('chat', (data) => {
         chatroom = document.getElementById('roomnumber').value;
         if (chatroom === data.room) {
-          $('.window').append('<div class="message">' + data.message + '</div>');
+          $('.window').append('<div class="message">' + data.user + ': ' + data.message + '</div>');
         };
       });
     },
