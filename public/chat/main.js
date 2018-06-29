@@ -2,6 +2,17 @@ var message;
 var chatroom;
 var socket;
 var name;
+var cookies;
+function parse(str) {
+  str = str.split(', ');
+  var result = {};
+  for (var i = 0; i < str.length; i++) {
+    var cur = str[i].split('=');
+    result[cur[0]] = cur[1];
+  };
+
+  return result;
+};
 
 function send() {
   if (message.length > 0) {
@@ -14,6 +25,11 @@ function send() {
 };
 
 $(document).ready(() => {
+  if (document.cookie) {
+    cookies = parse(document.cookie);
+    $('#name').val(cookies.username);
+  };
+
   $.ajax({
     type: 'GET',
     url: '/port',
@@ -61,6 +77,12 @@ $(document).ready(() => {
       $('.send').on('mouseup', () => {
         $('.send').css('background', 'rgb(76, 55, 207)');
       });
+      $('#name').on('keypress', (event) => {
+        if (event.charCode === 13) {
+          document.cookie = 'username=' + event.target.value;
+          console.log(document.cookie);
+        };
+      });
       $('.send').on('click', () => {
         message = document.getElementById('message').value;
         name = document.getElementById('name').value;
@@ -72,6 +94,7 @@ $(document).ready(() => {
         if (event.charCode === 13) {
           message = document.getElementById('message').value;
           name = document.getElementById('name').value;
+          document.cookie;
           send();
           $('#message').val('');
         };
