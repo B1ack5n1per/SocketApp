@@ -15,12 +15,14 @@ function parse(str) {
 };
 
 function send() {
-  if (message.length > 0) {
+  if (message.length > 0 && name.length > 0) {
     socket.emit('chat', {
       message: message,
       room: chatroom,
       user: name,
     });
+  } else if (name.length < 1) {
+    alert('Please provide a username in the Username box below');
   };
 };
 
