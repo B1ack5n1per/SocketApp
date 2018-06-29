@@ -94,6 +94,7 @@ $(document).ready(() => {
       $('.send').on('click', () => {
         message = document.getElementById('message').value;
         name = document.getElementById('name').value;
+        chatroom = document.getElementById('roomnumber').value;
         send();
         $('#message').val('');
       });
